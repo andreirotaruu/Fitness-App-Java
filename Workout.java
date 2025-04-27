@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FitnessGoalsApp {
+public class Workout {
     public static void main(String[] args) {
         // Create the frame
         JFrame frame = new JFrame("Fitness Goals Setup");
