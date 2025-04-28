@@ -5,6 +5,13 @@ import java.awt.event.ActionListener;
 
 public class Login extends JFrame {
 
+    private JTextField userField;
+    private JPasswordField passField;
+    private User currentUser;
+    private Users users = new Users();
+    private String storedUsername;
+    private String storedPassword;
+
     public Login() {
         setTitle("Sign In");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -14,9 +21,9 @@ public class Login extends JFrame {
 
         JPanel formPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         JLabel userLabel = new JLabel("Username:");
-        JTextField userField = new JTextField();
+        this.userField = new JTextField();
         JLabel passLabel = new JLabel("Password:");
-        JPasswordField passField = new JPasswordField();
+        this.passField = new JPasswordField();
 
         formPanel.add(userLabel);
         formPanel.add(userField);
@@ -38,19 +45,44 @@ public class Login extends JFrame {
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
+        // Create Account button
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Register();
-                dispose(); // Close current Sign In window
+                dispose();
+            }
+        });
+
+        // Sign In button
+        signInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                storedUsername = userField.getText();
+                storedPassword = new String(passField.getPassword());
+                if (storedUsername.isEmpty() || storedPassword.isEmpty()) {
+                    JOptionPane.showMessageDialog(Login.this, "Please enter username and password.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if(users.getUser(storedUsername, storedPassword) != null) {
+                    new Main();
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(Login.this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
         setVisible(true);
     }
 
+    public String getStoredUsername() {
+        return storedUsername;
+    }
+
+    public String getStoredPassword() {
+        return storedPassword;
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Login());
     }
 }
-

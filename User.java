@@ -6,15 +6,19 @@ public class User {
     private int goalWeight;
     private String goalBodyType;
     
-    public User(String name, int age, String email, String password, int goalWeight, String goalBodyType) {
-        this.name = name;
-        this.age = age;
+    public User(String email, String password, int goalWeight, String goalBodyType) {
         this.email = email;
         this.password = password;
         this.goalWeight = goalWeight;
         this.goalBodyType = goalBodyType;
     }
 
+    public User(String email, String password){
+        this.email = email;
+        this.password = password;
+        goalWeight = 0;
+        goalBodyType = "none";
+    }
 
     public String getName() {
         return name;
