@@ -57,13 +57,14 @@ public class Register extends JFrame {
                     JOptionPane.showMessageDialog(Register.this, "Please fill out all fields.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     try {
+
+                        //create new user and add to users list
                         User newUser = new User(registeredUsername, registeredPassword);
                         users.addUser(newUser);
 
-                        JOptionPane.showMessageDialog(Register.this, "Registration successful! Welcome!");
-
+                        //found from AI to put the main page in the front
                         SwingUtilities.invokeLater(() -> {
-                            Main mainPage = new Main();
+                            Main mainPage = new Main(newUser);
                             mainPage.setVisible(true);
                             mainPage.toFront();
                             mainPage.requestFocus();

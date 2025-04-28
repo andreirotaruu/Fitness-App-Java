@@ -20,9 +20,10 @@ public class Users {
         return usersList;
     }
 
+    //method to get current user by email and password
     public User getUser(String email, String password) {
         for (User user : usersList) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+            if (user.getUsername().equals(email) && user.getPassword().equals(password)) {
                 return user;
             }
         }

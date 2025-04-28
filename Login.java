@@ -63,7 +63,7 @@ public class Login extends JFrame {
                 if (storedUsername.isEmpty() || storedPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(Login.this, "Please enter username and password.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if(users.getUser(storedUsername, storedPassword) != null) {
-                    new Main();
+                    new Main(users.getUser(storedUsername, storedPassword));
                     dispose();
                 }else{
                     JOptionPane.showMessageDialog(Login.this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);

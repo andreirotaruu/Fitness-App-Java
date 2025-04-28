@@ -1,20 +1,20 @@
 public class User {
     private String name;
     private int age;
-    private String email;
+    private String username;
     private String password;
     private int goalWeight;
     private String goalBodyType;
     
-    public User(String email, String password, int goalWeight, String goalBodyType) {
-        this.email = email;
+    public User(String username, String password, int goalWeight, String goalBodyType) {
+        this.username = username;
         this.password = password;
         this.goalWeight = goalWeight;
         this.goalBodyType = goalBodyType;
     }
 
-    public User(String email, String password){
-        this.email = email;
+    public User(String username, String password){
+        this.username = username;
         this.password = password;
         goalWeight = 0;
         goalBodyType = "none";
@@ -34,12 +34,12 @@ public class User {
         this.age = age;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
