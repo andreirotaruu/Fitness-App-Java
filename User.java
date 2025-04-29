@@ -20,6 +20,15 @@ public class User {
         goalBodyType = "none";
     }
 
+    public User(){
+        this.name = "none";
+        this.age = 0;
+        this.username = "none";
+        this.password = "none";
+        this.goalWeight = 0;
+        this.goalBodyType = "none";
+    }
+
     public String getName() {
         return name;
     }

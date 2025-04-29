@@ -1,0 +1,176 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class Workout {
+    private User currentUser;
+    private String[] workouts; // holds workouts to display
+
+    // Constructor
+    public Workout(User currentUser) {
+        this.currentUser = currentUser;
+        String selectedBodyType = currentUser.getGoalBodyType();  
+        initializeWorkouts(selectedBodyType);
+        createWorkoutScreen(selectedBodyType);
+    }
+
+    public static void main(String[] args) {
+        // Example usage
+        User user = new User("Athletic");  // you pass a string goal manually here
+        new Workout(user);
+    }
+
+    private void createWorkoutScreen(String selectedBodyType) {
+        JFrame frame = new JFrame("Recommended Workouts");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new BorderLayout());
+
+        JLabel titleLabel = new JLabel("Workout Split For: " + selectedBodyType, SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        frame.add(titleLabel, BorderLayout.NORTH);
+
+        // Create and populate the workout list
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (String workout : workouts) {
+            listModel.addElement(workout);
+        }
+
+        JList<String> workoutList = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(workoutList);
+        frame.add(scrollPane, BorderLayout.CENTER);
+
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private void initializeWorkouts(String selectedBodyType) {
+        if (selectedBodyType.equalsIgnoreCase("Athletic")) {
+            workouts = new String[] {
+                "Day 1: Upper Body - Bench Press, Pull-Ups, Shoulder Press, Tricep Dips",
+                "Day 2: Lower Body - Squats, Deadlifts, Lunges, Calf Raises",
+                "Day 3: Plyometrics - Box Jumps, Burpees, Medicine Ball Slams",
+                "Day 4: Rest",
+                "Day 5: Athletic Training - Agility Ladder Drills, Sprints, Box Jumps",
+                "Day 6: Cardio - Treadmill Intervals",
+                "Day 7: Rest"
+            };
+        } else if (selectedBodyType.equalsIgnoreCase("Lean")) {
+            workouts = new String[] {
+                "Day 1: Push - Bench Press, Incline Dumbbell Press, Pec Deck Flies, Tricep Pushdowns, Dips",
+                "Day 2: Pull - Lat Pulldown, Upper Back Rows, Single Arm Rows, Incline Curls, Hammer Curls",
+                "Day 3: Legs + Abs - Calf Raises, Seated Hamstring Curls, RDLs, Squats, Nordic Curls, Russian Twists",
+                "Day 4: Cardio",
+                "Day 5: Push - Repeat",
+                "Day 6: Pull - Repeat",
+                "Day 7: Legs + Abs - Calf Raises, Squats, Lunges, Leg Extensions, Russian Twists"
+            };
+        } else if (selectedBodyType.equalsIgnoreCase("Bodybuilder")) {
+            workouts = new String[] {
+                "Day 1: Push - Bench Press, Incline Dumbbell Press, Pec Deck Flies, Tricep Pushdowns, Dips",
+                "Day 2: Pull - Lat Pulldown, Upper Back Rows, Single Arm Rows, Incline Curls, Hammer Curls",
+                "Day 3: Legs - Calf Raises, Seated Hamstring Curls, RDLs, Squats, Nordic Curls",
+                "Day 4: Rest",
+                "Day 5: Push - Repeat",
+                "Day 6: Pull - Repeat",
+                "Day 7: Legs - Calf Raises, Squats, Lunges, Leg Extensions"
+            };
+        } else {
+            workouts = new String[] { "No workouts available for selected body type." };
+        }
+    }
+}
+
+// Dummy User class (you need this too)
+class User {
+    private String goalBodyType;
+
+    public User(String goalBodyType) {
+        this.goalBodyType = goalBodyType;
+    }
+
+    public String getGoalBodyType() {
+        return goalBodyType;
+    }
+}
+
+
+
+
+
+/*public class Workout {
+    
+    private User currentUser;
+    public Workout(User currentUser) {
+        this.currentUser = currentUser;
+        createWorkoutScreen(currentUser.getGoalBodyType());
+    }
+
+    public static void main(String[] args) {
+        User currentUser = new User();
+        SwingUtilities.invokeLater(() -> new Workout(currentUser));
+    }
+    private static void createWorkoutScreen(selectedbodyType) {
+        // Initialize workout plans
+        initializeWorkouts();
+
+        JFrame frame = new JFrame("Recommended Workouts");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new BorderLayout());
+
+        JLabel titleLabel = new JLabel("Workout Split For: " + selectedbodyType, SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        frame.add(titleLabel, BorderLayout.NORTH);
+
+
+
+        // Display workouts in a list
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (String workout : workouts) {
+            listModel.addElement(workout);
+        }
+
+        JList<String> workoutList = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(workoutList);
+        frame.add(scrollPane, BorderLayout.CENTER);
+
+        frame.setLocationRelativeTo(null); // Center the window
+        frame.setVisible(true);
+    }
+
+    public static String initializeWorkouts() {
+        String[] Athlete = {
+            "Day 1: Upper Body-\nBench Press\nPull-Ups\nShoulder Press\nTricep Dips\n"
+            "Day 2: Lower Body-\nSquats\nDeadlifts\nLunges\nCalf Raises\n"
+            "Day 3: Plyometrics-\nBox Jumps\nBurpees\nMedicine Ball Slams\n"
+            "Day 4: Rest\n"
+            "Day 5: Athletic Training- Agility Ladder Drills\nSprints\nBox Jumps\n"
+            "Day 6: Cardio- Treadmill Intervals\n"
+            "Day 7: Rest\n"
+        }
+        String[] Lean = {
+            "Day 1: Push(Chest and Triceps)-\nBench Press\nIncline Dumbell Press\nPec Deck Flies\nTricep Pushdowns\nDips\n"
+            "Day 2: Pull(Back and Biceps-\nLat Pulldown\n\nUpper Back Rows\nSingle Arm Rows\nIncline Curls\nHammerhead Curls\n"
+            "Day 3: Legs(Hamstrings and Glutes) + Abs-\nCalf Raises\nSeated hamstring curls\nRDL's\nSquats\nNordic Curls\nDecline Ab Curls\nRussian Twists\n"
+            "Day 4: Cardio\n"
+            "Day 5: Push(Chest and Triceps)-\nBench Press\nIncline Dumbell Press\nPec Deck Flies\nTricep Pushdowns\nDips\n"
+            "Day 6: Pull(Back and Biceps)-\nLat Pulldown\n\nUpper Back Rows\nSingle Arm Rows\nIncline Curls\nHammerhead Curls\n"
+            "Day 7: Legs(Quads) + Abs-\nCalf Raises\nSquats\nLeg Press\nLunges\nLeg Extensions\nDecline Ab Curls\nRussian Twists\n"
+        }
+        String[] Bodybuilder = {
+            "Day 1: Push(Chest and Triceps)-\nBench Press\nIncline Dumbell Press\nPec Deck Flies\nTricep Pushdowns\nDips\n"
+            "Day 2: Pull(Back and Biceps-\nLat Pulldown\n\nUpper Back Rows\nSingle Arm Rows\nIncline Curls\nHammerhead Curls\n"
+            "Day 3: Legs(Hamstrings and Glutes)-\nCalf Raises\nSeated hamstring curls\nRDL's\nSquats\nNordic Curls\n"
+            "Day 4: Rest\n"
+            "Day 5: Push(Chest and Triceps)-\nBench Press\nIncline Dumbell Press\nPec Deck Flies\nTricep Pushdowns\nDips\n"
+            "Day 6: Pull(Back and Biceps)-\nLat Pulldown\n\nUpper Back Rows\nSingle Arm Rows\nIncline Curls\nHammerhead Curls\n"
+            "Day 7: Legs(Quads)-\nCalf Raises\nSquats\nLeg Press\nLunges\nLeg Extensions\n"
+        }
+    }
+
+
+}
+*/
+
+
+
