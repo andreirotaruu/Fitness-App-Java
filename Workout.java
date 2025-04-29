@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Workout {
-    public static void main(String[] args) {
+    public Workout(User currentUser) {
         // Create the frame
         JFrame frame = new JFrame("Fitness Goals Setup");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,6 +18,8 @@ public class Workout {
         JLabel weightLabel = new JLabel("Goal Weight (lbs):");
         JTextField weightField = new JTextField(10);
 
+        currentUser.setGoalWeight(Integer.parseInt(weightField.getText()));
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         frame.add(weightLabel, gbc);

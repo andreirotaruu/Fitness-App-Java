@@ -10,9 +10,10 @@ public class Register extends JFrame {
     private User currentUser;
     private String registeredUsername;
     private String registeredPassword;
-    private Users users = new Users();
+    private Users users;
 
-    public Register() {
+    public Register(Users users) {
+        this.users = users;
         setTitle("Register");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 300);
@@ -83,7 +84,7 @@ public class Register extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(() -> new Login());
+                SwingUtilities.invokeLater(() -> new Login(users));
                 dispose();
             }
         });

@@ -13,10 +13,15 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(3, 1, 10, 10));
+        setLayout(new GridLayout(6, 1, 10, 10));
 
         JLabel welcomeLabel = new JLabel("Welcome " + currentUser.getUsername(), SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel weightLabel = new JLabel("Weight: " + currentUser.getGoalWeight() + " kg", SwingConstants.CENTER);
+        weightLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel physiqueLabel = new JLabel("Dream Physique: " + currentUser.getGoalBodyType(), SwingConstants.CENTER);
+        physiqueLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
 
         JButton workoutPlannerButton = new JButton("Workout Planner");
         JButton dietPlannerButton = new JButton("Diet Planner");
@@ -24,7 +29,8 @@ public class Main extends JFrame {
         workoutPlannerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(Main.this, "Workout Planner Coming Soon!");
+                dispose();
+                new Workout(currentUser);
             }
         });
 
@@ -39,14 +45,17 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new Login(); 
+                //new Login(); 
             }
         });
 
         add(welcomeLabel);
+        add(weightLabel);
+        add(physiqueLabel);
         add(workoutPlannerButton);
         add(dietPlannerButton);
         add(logoutButton);
+        
         setVisible(true);
     }
 }

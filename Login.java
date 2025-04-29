@@ -8,11 +8,12 @@ public class Login extends JFrame {
     private JTextField userField;
     private JPasswordField passField;
     private User currentUser;
-    private Users users = new Users();
+    private Users users;
     private String storedUsername;
     private String storedPassword;
 
-    public Login() {
+    public Login(Users users) {
+        this.users = users;
         setTitle("Sign In");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 250);
@@ -83,6 +84,7 @@ public class Login extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Login());
+        Users users = new Users();
+        SwingUtilities.invokeLater(() -> new Login(users));
     }
 }
